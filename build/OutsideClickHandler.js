@@ -31,8 +31,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DISPLAY = {
   BLOCK: 'block',
   FLEX: 'flex',
-  INLINE_BLOCK: 'inline-block',
-  CONTENTS: 'contents'
+  INLINE_BLOCK: 'inline-block'
 };
 
 var propTypes = (0, _airbnbPropTypes.forbidExtraProps)({
@@ -40,7 +39,8 @@ var propTypes = (0, _airbnbPropTypes.forbidExtraProps)({
   onOutsideClick: _propTypes2['default'].func.isRequired,
   disabled: _propTypes2['default'].bool,
   useCapture: _propTypes2['default'].bool,
-  display: _propTypes2['default'].oneOf(Object.values(DISPLAY))
+  display: _propTypes2['default'].oneOf(Object.values(DISPLAY)),
+  className: _propTypes2['default'].string
 });
 
 var defaultProps = {
@@ -49,7 +49,8 @@ var defaultProps = {
   // `useCapture` is set to true by default so that a `stopPropagation` in the
   // children will not prevent all outside click handlers from firing - maja
   useCapture: true,
-  display: DISPLAY.BLOCK
+  display: DISPLAY.BLOCK,
+  className: ''
 };
 
 var OutsideClickHandler = function (_React$Component) {
@@ -196,12 +197,13 @@ var OutsideClickHandler = function (_React$Component) {
         var _props2 = this.props,
             children = _props2.children,
             display = _props2.display,
-            style = _props2.style;
+            style = _props2.style,
+            className = _props2.className;
 
 
         return _react2['default'].createElement(
           'div',
-          { ref: this.setChildNodeRef, style: style },
+          { className: className, ref: this.setChildNodeRef, style: style },
           children
         );
       }

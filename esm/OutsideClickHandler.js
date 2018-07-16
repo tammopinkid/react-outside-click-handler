@@ -16,8 +16,7 @@ import objectValues from 'object.values';
 var DISPLAY = {
   BLOCK: 'block',
   FLEX: 'flex',
-  INLINE_BLOCK: 'inline-block',
-  CONTENTS: 'contents'
+  INLINE_BLOCK: 'inline-block'
 };
 
 var propTypes = forbidExtraProps({
@@ -25,7 +24,8 @@ var propTypes = forbidExtraProps({
   onOutsideClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   useCapture: PropTypes.bool,
-  display: PropTypes.oneOf(Object.values(DISPLAY))
+  display: PropTypes.oneOf(Object.values(DISPLAY)),
+  className: PropTypes.string
 });
 
 var defaultProps = {
@@ -34,7 +34,8 @@ var defaultProps = {
   // `useCapture` is set to true by default so that a `stopPropagation` in the
   // children will not prevent all outside click handlers from firing - maja
   useCapture: true,
-  display: DISPLAY.BLOCK
+  display: DISPLAY.BLOCK,
+  className: ''
 };
 
 var OutsideClickHandler = function (_React$Component) {
@@ -181,12 +182,13 @@ var OutsideClickHandler = function (_React$Component) {
         var _props2 = this.props,
             children = _props2.children,
             display = _props2.display,
-            style = _props2.style;
+            style = _props2.style,
+            className = _props2.className;
 
 
         return React.createElement(
           'div',
-          { ref: this.setChildNodeRef, style: style },
+          { className: className, ref: this.setChildNodeRef, style: style },
           children
         );
       }

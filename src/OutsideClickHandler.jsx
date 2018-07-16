@@ -9,7 +9,6 @@ const DISPLAY = {
   BLOCK: 'block',
   FLEX: 'flex',
   INLINE_BLOCK: 'inline-block',
-  CONTENTS: 'contents',
 };
 
 const propTypes = forbidExtraProps({
@@ -18,6 +17,7 @@ const propTypes = forbidExtraProps({
   disabled: PropTypes.bool,
   useCapture: PropTypes.bool,
   display: PropTypes.oneOf(Object.values(DISPLAY)),
+  className: PropTypes.string,
 });
 
 const defaultProps = {
@@ -27,6 +27,7 @@ const defaultProps = {
   // children will not prevent all outside click handlers from firing - maja
   useCapture: true,
   display: DISPLAY.BLOCK,
+  className: '',
 };
 
 export default class OutsideClickHandler extends React.Component {
@@ -104,10 +105,12 @@ export default class OutsideClickHandler extends React.Component {
   }
 
   render() {
-    const { children, display, style } = this.props;
+    const {
+      children, display, style, className,
+    } = this.props;
 
     return (
-      <div ref={this.setChildNodeRef} style={style}>
+      <div className={className} ref={this.setChildNodeRef} style={style}>
         {children}
       </div>
     );
